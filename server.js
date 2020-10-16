@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
 const topic = require('./lib/topic.js');
+const author = require('./lib/author.js');
 
 const server = http.createServer(function(request, response) {
     const pathname = url.parse(request.url, true).pathname;
@@ -22,6 +23,16 @@ const server = http.createServer(function(request, response) {
         topic.update_process(request, response);
     } else if(pathname === '/delete_process') {
         topic.delete_process(request, response);
+    } else if(pathname === '/author') {
+        author.home(request, response);
+    } else if(pathname === '/author/create') {
+        author.create(request, response);
+    } else if(pathname === '/author/create_process') {
+        author.create_process(request, response);
+    } else if(pathname === '/author/update') {
+        author.update(request, response);
+    } else if(pathname === '/author/update_process') {
+        author.update_process(request, response);
     } else {
         response.writeHead(404, {'Content-Type' : 'text/html'});
         response.write('Not found');
